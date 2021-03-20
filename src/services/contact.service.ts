@@ -1,12 +1,14 @@
 export const sendEmail = async (payload: unknown) => {
   const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID;
-  const path = `http://formspree.io/f/${formId}`;
+  const path = `https://formspree.io/f/${formId}`;
 
-  return await fetch(path, {
+  const response = await fetch(path, {
     method: "POST",
     headers: {
-      Accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
   });
+
+  return response.json();
 };
