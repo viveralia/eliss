@@ -1,40 +1,24 @@
-import { Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
-import { Formik, FormikHelpers } from "formik";
-import { useRouter } from "next/router";
-import { FC, useEffect, useRef } from "react";
-import * as Yup from "yup";
+import { FC, useReducer } from "react";
+import { useForm } from "react-hook-form";
 
 import * as contactService from "../../services/contact.service";
-import { FormStatusEnum } from "../../types";
-import { validationErrorMessages as errors } from "../../utils/errors.utils";
-import { FormikTextField, Section } from "../molecules";
+import { validationErrorMessages as messages } from "../../utils/errors.utils";
+import { Section } from "../molecules";
+import { contactFormReducer, ContactFormState } from "../../reducers";
 
-interface FormValues {
+interface FormData {
   email: string;
   message: string;
   name: string;
   subject: string;
 }
 
-const INITIAL_FORM_VALUES: FormValues = {
-  email: "",
-  message: "",
-  name: "",
-  subject: "",
+const INITIAL_STATE: ContactFormState = {
+  success: undefined,
+  feedbackMessage: null,
 };
-
-const feedback = {
-  SUCCESS: "Hemos recibido tus datos y te responderemos a la brevedad.",
-  FAILURE: "Algo salió mal y no pudimos enviar tus datos. Intenta más tarde.",
-};
-
-const schema = Yup.object().shape({
-  email: Yup.string().email(errors.email).required(errors.required),
-  message: Yup.string().required(errors.required),
-  name: Yup.string().required(errors.required),
-  subject: Yup.string().required(errors.required),
-});
 
 const useStyles = makeStyles(() => ({
   form: {
@@ -48,72 +32,95 @@ const useStyles = makeStyles(() => ({
 
 const Contact: FC = () => {
   const classes = useStyles();
-  const router = useRouter();
-  const firstInputRef = useRef(null);
+  const { register, errors, handleSubmit, formState, reset } = useForm();
+  const [state, dispatch] = useReducer(contactFormReducer, INITIAL_STATE);
 
-  useEffect(() => {
-    if (router.asPath === "/#contacto") {
-      firstInputRef.current.focus();
-    }
-  }, [router]);
-
-  const handleSubmit = async (
-    formValues: FormValues,
-    { resetForm, setStatus }: FormikHelpers<FormValues>
-  ) => {
+  async function onSubmit(data: FormData) {
     try {
-      setStatus(FormStatusEnum.INITIAL);
-      await contactService.sendEmail(formValues);
-      setStatus(FormStatusEnum.SUCCESS);
-      resetForm();
+      dispatch({ type: "SENDING_EMAIL" });
+      await contactService.sendEmail(data);
+      reset();
+      dispatch({ type: "EMAIL_SENT_SUCCESS" });
     } catch (error) {
-      setStatus(FormStatusEnum.FAILURE);
+      dispatch({ type: "EMAIL_SENT_FAILURE" });
       console.error(error);
     }
-  };
+  }
 
   return (
     <Section title="Contacto" id="contacto">
-      <Formik
-        initialStatus={FormStatusEnum.INITIAL}
-        initialValues={INITIAL_FORM_VALUES}
-        validationSchema={schema}
-        onSubmit={handleSubmit}
-      >
-        {({ handleSubmit, isSubmitting, status }) => (
-          <form className={classes.form} onSubmit={handleSubmit}>
-            <FormikTextField
-              name="name"
-              label="Nombre"
-              inputRef={firstInputRef}
-            />
-            <FormikTextField name="email" label="Correo electrónico" />
-            <FormikTextField name="subject" label="Asunto" />
-            <FormikTextField
-              name="message"
-              label="Mensaje"
-              multiline
-              rows={4}
-            />
-            {status !== FormStatusEnum.INITIAL && (
-              <Alert>
-                {status === FormStatusEnum.SUCCESS && feedback.SUCCESS}
-                {status === FormStatusEnum.FAILURE && feedback.FAILURE}
-              </Alert>
-            )}
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              disabled={isSubmitting}
-              disableElevation
-              size="large"
-            >
-              {isSubmitting ? "Enviando..." : "Enviar"}
-            </Button>
-          </form>
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          id="name"
+          name="name"
+          type="text"
+          label="Nombre"
+          error={!!errors.name}
+          helperText={errors.name?.message}
+          inputRef={register({
+            required: { value: true, message: messages.required },
+          })}
+        />
+        <TextField
+          fullWidth
+          variant="outlined"
+          id="email"
+          name="email"
+          type="email"
+          label="Correo electrónico"
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          inputRef={register({
+            required: { value: true, message: messages.required },
+            pattern: { value: /^[^\s@]+@[^\s@]+$/, message: messages.email },
+          })}
+        />
+        <TextField
+          fullWidth
+          variant="outlined"
+          id="subject"
+          name="subject"
+          type="text"
+          label="Asunto"
+          error={!!errors.subject}
+          helperText={errors.subject?.message}
+          inputRef={register({
+            required: { value: true, message: messages.required },
+          })}
+        />
+        <TextField
+          fullWidth
+          variant="outlined"
+          id="message"
+          name="message"
+          type="text"
+          label="Mensaje"
+          multiline
+          rows={4}
+          error={!!errors.message}
+          helperText={errors.message?.message}
+          inputRef={register({
+            required: { value: true, message: messages.required },
+          })}
+        />
+        {state.success !== undefined && (
+          <Alert severity={state.success ? "success" : "error"}>
+            {state.feedbackMessage}
+          </Alert>
         )}
-      </Formik>
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={formState.isSubmitting}
+          disableElevation
+          size="large"
+        >
+          {formState.isSubmitting ? "Enviando..." : "Enviar"}
+        </Button>
+      </form>
     </Section>
   );
 };

@@ -1,6 +1,3 @@
-export { default as FormikTextField } from "./formikTextField";
-export * from "./formikTextField";
-
 export { default as LiveBadge } from "./liveBadge";
 export * from "./liveBadge";
 
