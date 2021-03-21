@@ -5,6 +5,7 @@ import { DefaultSeo } from "next-seo";
 
 import { darkTheme, lightTheme } from "../styles";
 import { StreamingModalContextProvider } from "../context";
+import { Navbar } from "../components";
 import defaultSeo from "../constants/defaultSeo";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -28,6 +29,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <StreamingModalContextProvider>
+          <Navbar />
           <Component {...pageProps} />
         </StreamingModalContextProvider>
       </ThemeProvider>

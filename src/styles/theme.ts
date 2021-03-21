@@ -77,6 +77,10 @@ const nonResponsiveDarkTheme = createMuiTheme({
       main: "#FBFBFB",
     },
     divider: "rgba(255, 255, 255, 0.125)",
+    background: {
+      paper: "#212121",
+      default: "#101010",
+    },
   },
 });
 
