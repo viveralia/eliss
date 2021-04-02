@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import { transparentize } from "polished";
 import { FC, useCallback } from "react";
 
-import navbarLinks from "../../../constants/navbarLinks";
-import { NavigationButton, NavigationLink } from "../../molecules";
+import navbarLinks from "~constants/navbarLinks";
+import { NavigationButton, NavigationLink } from "~components";
 
 const useStyles = makeStyles(theme => ({
   brand: {

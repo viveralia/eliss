@@ -1,9 +1,10 @@
 import { createContext, Dispatch, FC, useMemo, useReducer } from "react";
+
 import {
   streamingModalReducer,
   StreamingModalPlatformAction,
   StreamingModalPlatformState,
-} from "../reducers";
+} from "~reducers";
 
 interface StreamingModalContextValue {
   state: StreamingModalPlatformState;

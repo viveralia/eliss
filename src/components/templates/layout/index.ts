@@ -6,3 +6,6 @@ export * from "./layout";
 
 export { default as Navbar } from "./navbar";
 export * from "./navbar";
+
+export { default as StreamingPlatformsModal } from "./streamingPlatformsModal";
+export * from "./streamingPlatformsModal";

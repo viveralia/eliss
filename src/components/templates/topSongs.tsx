@@ -2,9 +2,8 @@ import { Button, makeStyles, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { FC, useCallback } from "react";
 
-import { Song } from "../organisms";
-import { StrapiSong } from "../../types";
-import { Section } from "../molecules";
+import { Section, Song } from "~components";
+import { StrapiSong } from "~types";
 
 export interface TopSongsProps {
   songs: StrapiSong[];

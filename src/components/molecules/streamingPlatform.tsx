@@ -1,13 +1,14 @@
 import { Button, makeStyles } from "@material-ui/core";
 import { FC } from "react";
-import brandsStrategy from "../../constants/brandsStrategy";
-import { StrapiSocialNetwork } from "../../types";
+
+import catalog from "~constants/brandsCatalog";
+import { StrapiSocialNetwork } from "~types";
 
 export interface StreamingPlatformProps {
   platform: StrapiSocialNetwork;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   platform: {
     fontSize: "1.125rem",
     marginRight: "0.75rem",
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StreamingPlatform: FC<StreamingPlatformProps> = ({ platform }) => {
   const classes = useStyles();
-  const { Icon, color } = brandsStrategy[platform.name];
+  const { Icon, color } = catalog[platform.name];
 
   return (
     <li className={classes.listItem}>

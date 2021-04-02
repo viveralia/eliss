@@ -1,14 +1,14 @@
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
-import { ComingEvents, Contact, Hero, Layout, TopSongs } from "../components";
+import { ComingEvents, Contact, Hero, Layout, TopSongs } from "~components";
 import {
   StrapiEvent,
   StrapiHomePage,
   StrapiSocialNetwork,
   StrapiSong,
-} from "../types";
-import { fetchStrapi } from "../utils";
+} from "~types";
+import { fetchStrapi } from "~utils";
 
 interface ServerProps {
   page: StrapiHomePage;
@@ -23,7 +23,7 @@ const HomePage: NextPage<ServerProps> = ({
   events,
   socialNetworks,
 }) => {
-  const comingEventsOnly = events.filter((event) => {
+  const comingEventsOnly = events.filter(event => {
     return new Date(event.ends) > new Date();
   });
 

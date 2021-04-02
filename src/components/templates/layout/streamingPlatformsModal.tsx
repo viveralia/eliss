@@ -8,9 +8,9 @@ import {
 import { useRouter } from "next/router";
 import { FC, useCallback, useContext, useEffect } from "react";
 
-import { StreamingModalContext } from "../../../context";
-import { StrapiSocialNetwork } from "../../../types";
-import { StreamingPlatform } from "../../molecules";
+import { StreamingPlatform } from "~components";
+import { StreamingModalContext } from "~context";
+import { StrapiSocialNetwork } from "~types";
 
 interface StreamingPlatformsModalProps {
   streamingPlatforms: StrapiSocialNetwork[];
