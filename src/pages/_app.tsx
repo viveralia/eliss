@@ -3,10 +3,10 @@ import { CssBaseline, ThemeProvider, useMediaQuery } from "@material-ui/core";
 import { AppProps } from "next/app";
 import { DefaultSeo } from "next-seo";
 
-import { darkTheme, lightTheme } from "../styles";
-import { StreamingModalContextProvider } from "../context";
-import { Navbar } from "../components";
-import defaultSeo from "../constants/defaultSeo";
+import { Navbar } from "~components";
+import defaultSeo from "~constants/defaultSeo";
+import { StreamingModalContextProvider } from "~context";
+import { darkTheme, lightTheme } from "~styles";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const isDark = useMediaQuery("(prefers-color-scheme: dark)");

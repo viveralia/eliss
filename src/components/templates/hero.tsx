@@ -5,17 +5,18 @@ import {
   Link,
   Typography,
 } from "@material-ui/core";
+import Img from "next/image";
 import NextLink from "next/link";
 import { FC } from "react";
-import Img from "next/image";
-import { StrapiCloudinaryImage } from "../../types/strapi.types";
+
+import { StrapiCloudinaryImage } from "~types";
 
 export interface HeroProps {
   img: StrapiCloudinaryImage;
   headline: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   brand: {
     position: "absolute",
     top: "-5.25rem",

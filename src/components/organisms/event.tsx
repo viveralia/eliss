@@ -1,9 +1,8 @@
 import { Button, Link, makeStyles, Typography } from "@material-ui/core";
 import { FC, useEffect, useState } from "react";
 
-import { StrapiEvent } from "../../types";
-import { RevealOnScroll } from "../atoms";
-import { LiveBadge } from "../molecules";
+import { StrapiEvent } from "~types";
+import { LiveBadge, RevealOnScroll } from "~components";
 
 export interface EventProps {
   event: StrapiEvent;

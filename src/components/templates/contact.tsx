@@ -3,10 +3,10 @@ import { Alert } from "@material-ui/lab";
 import { FC, useReducer } from "react";
 import { useForm } from "react-hook-form";
 
-import * as contactService from "../../services/contact.service";
-import { validationErrorMessages as messages } from "../../utils/errors.utils";
-import { Section } from "../molecules";
-import { contactFormReducer, ContactFormState } from "../../reducers";
+import { Section } from "~components";
+import { contactFormReducer, ContactFormState } from "~reducers";
+import * as contactService from "~services/contact.service";
+import { validationErrorMessages as messages } from "~utils";
 
 interface FormData {
   email: string;

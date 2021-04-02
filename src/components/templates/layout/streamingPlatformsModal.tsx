@@ -8,15 +8,15 @@ import {
 import { useRouter } from "next/router";
 import { FC, useCallback, useContext, useEffect } from "react";
 
-import { StreamingModalContext } from "../../../context";
-import { StrapiSocialNetwork } from "../../../types";
-import { StreamingPlatform } from "../../molecules";
+import { StreamingPlatform } from "~components";
+import { StreamingModalContext } from "~context";
+import { StrapiSocialNetwork } from "~types";
 
 interface StreamingPlatformsModalProps {
   streamingPlatforms: StrapiSocialNetwork[];
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   dialogPaper: {
     maxWidth: 450,
     paddingBottom: "1rem",
@@ -44,14 +44,18 @@ const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({
   const router = useRouter();
 
   useEffect(() => {
-    if (router.query.musica !== undefined) {
+    if (router.query.music) {
       dispatch({ type: "SHOW_STREAMING_PLATFORMS" });
+    } else {
+      dispatch({ type: "HIDE_STREAMING_PLATFORMS" });
     }
   }, [router]);
 
   const handleClose = useCallback(() => {
-    dispatch({ type: "HIDE_STREAMING_PLATFORMS" });
-  }, []);
+    const url = new URL(window?.location.href);
+    url.searchParams.delete("music");
+    router.push(url, undefined, { scroll: false });
+  }, [router]);
 
   return (
     <Dialog
@@ -72,7 +76,7 @@ const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({
       <DialogContent>
         {streamingPlatforms.length > 0 ? (
           <ul className={classes.list}>
-            {streamingPlatforms.map((platform) => (
+            {streamingPlatforms.map(platform => (
               <StreamingPlatform key={platform.id} platform={platform} />
             ))}
           </ul>
