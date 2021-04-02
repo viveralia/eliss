@@ -1,16 +1,16 @@
 import { Button, makeStyles, Typography } from "@material-ui/core";
-import { FC, useContext } from "react";
+import { useRouter } from "next/router";
+import { FC, useCallback } from "react";
 
 import { Song } from "../organisms";
 import { StrapiSong } from "../../types";
 import { Section } from "../molecules";
-import { StreamingModalContext } from "../../context";
 
 export interface TopSongsProps {
   songs: StrapiSong[];
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   grid: {
     display: "grid",
     gridTemplateColumns: "1fr",
@@ -39,23 +39,27 @@ const useStyles = makeStyles((theme) => ({
 
 const TopSongs: FC<TopSongsProps> = ({ songs }) => {
   const classes = useStyles();
-  const { dispatch } = useContext(StreamingModalContext);
+  const router = useRouter();
 
-  const handleClick = () => {
-    dispatch({ type: "SHOW_STREAMING_PLATFORMS" });
-  };
+  const handleMusicClick = useCallback(() => {
+    if (router.query.music) return;
+
+    const url = new URL(window?.location.href);
+    url.searchParams.append("music", "open");
+    router.push(url, undefined, { scroll: false });
+  }, [router]);
 
   return (
     <Section title="Te recomendamos escuchar">
       {songs.length > 0 ? (
         <>
           <div className={classes.grid}>
-            {songs.map((song) => (
+            {songs.map(song => (
               <Song key={song.id} spotifyUri={song.spotifyUri} />
             ))}
           </div>
           <Button
-            onClick={handleClick}
+            onClick={handleMusicClick}
             variant="contained"
             color="primary"
             disableElevation

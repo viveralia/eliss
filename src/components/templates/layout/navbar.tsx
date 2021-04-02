@@ -1,13 +1,13 @@
 import { Box, Container, Hidden, makeStyles } from "@material-ui/core";
 import Link from "next/link";
-import { FC, useContext, useMemo } from "react";
+import { useRouter } from "next/router";
 import { transparentize } from "polished";
+import { FC, useCallback } from "react";
 
 import navbarLinks from "../../../constants/navbarLinks";
 import { NavigationButton, NavigationLink } from "../../molecules";
-import { StreamingModalContext } from "../../../context";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   brand: {
     height: 30,
     width: "auto",
@@ -52,19 +52,25 @@ const useStyles = makeStyles((theme) => ({
 
 const NavigationLinks: FC = () => {
   const classes = useStyles();
-  const { dispatch } = useContext(StreamingModalContext);
+  const router = useRouter();
 
-  const musicNavItem = useMemo(() => {
-    return {
-      name: "Música",
-      onClick: () => dispatch({ type: "SHOW_STREAMING_PLATFORMS" }),
-    };
-  }, []);
+  const handleMusicClick = useCallback(() => {
+    if (router.query.music) return;
+
+    const url = new URL(window?.location.href);
+    url.searchParams.append("music", "open");
+    router.push(url, undefined, { scroll: false });
+  }, [router]);
 
   return (
     <ul className={classes.list}>
-      <NavigationButton navItem={musicNavItem} />
-      {navbarLinks.map((item) => (
+      <NavigationButton
+        navItem={{
+          name: "Música",
+          onClick: handleMusicClick,
+        }}
+      />
+      {navbarLinks.map(item => (
         <NavigationLink key={item.path} navItem={item} />
       ))}
     </ul>
