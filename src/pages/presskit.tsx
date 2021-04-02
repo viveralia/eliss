@@ -3,16 +3,16 @@ import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Markdown from "react-markdown";
 
-import { Layout, PageHeader } from "../components";
-import { StrapiPresskitPage, StrapiSocialNetwork } from "../types";
-import { fetchStrapi } from "../utils";
+import { Layout, PageHeader } from "~components";
+import { StrapiPresskitPage, StrapiSocialNetwork } from "~types";
+import { fetchStrapi } from "~utils";
 
 interface ServerProps {
   page: StrapiPresskitPage;
   socialNetworks: StrapiSocialNetwork[];
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     "& img": {
       marginLeft: "-1rem",

@@ -1,13 +1,14 @@
 import { Link, makeStyles } from "@material-ui/core";
 import { FC } from "react";
-import brandsStrategy from "../../constants/brandsStrategy";
-import { StrapiSocialNetwork } from "../../types";
+
+import catalog from "~constants/brandsCatalog";
+import { StrapiSocialNetwork } from "~types";
 
 export interface SocialNetworkProps {
   network: StrapiSocialNetwork;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   listItem: {
     "&:last-child": {
       marginRight: 0,
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SocialNetwork: FC<SocialNetworkProps> = ({ network }) => {
   const classes = useStyles();
-  const { Icon } = brandsStrategy[network.name];
+  const { Icon } = catalog[network.name];
 
   return (
     <li className={classes.listItem}>

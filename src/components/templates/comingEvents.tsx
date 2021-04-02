@@ -1,16 +1,15 @@
 import { Button, makeStyles, Typography } from "@material-ui/core";
-import { FC } from "react";
 import NextLink from "next/link";
+import { FC } from "react";
 
-import { Event } from "../organisms";
-import { StrapiEvent } from "../../types";
-import { Section } from "../molecules";
+import { Event, Section } from "~components";
+import { StrapiEvent } from "~types";
 
 export interface ComingEventsProps {
   events: StrapiEvent[];
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   grid: {
     display: "grid",
     gridTemplateColumns: "1fr",
@@ -41,7 +40,7 @@ const ComingEvents: FC<ComingEventsProps> = ({ events }) => {
       {events.length > 0 ? (
         <>
           <div className={classes.grid}>
-            {events.map((event) => (
+            {events.map(event => (
               <Event key={event.id} event={event} />
             ))}
           </div>

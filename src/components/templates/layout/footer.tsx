@@ -2,15 +2,15 @@ import { Container, Link, makeStyles, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import { FC } from "react";
 
-import { StrapiSocialNetwork } from "../../../types";
-import { SocialNetwork } from "../../molecules";
+import { StrapiSocialNetwork } from "~types";
+import { SocialNetwork } from "~components";
 
 export interface FooterProps {
   socialNetworks: StrapiSocialNetwork[];
   className?: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   container: {
     paddingBottom: "3.5rem",
     paddingTop: "3.5rem",
@@ -63,7 +63,7 @@ const Footer: FC<FooterProps> = ({ socialNetworks, className }) => {
       </Typography>
       <nav>
         <ul className={classes.list}>
-          {socialNetworks.map((network) => (
+          {socialNetworks.map(network => (
             <SocialNetwork key={network.id} network={network} />
           ))}
         </ul>

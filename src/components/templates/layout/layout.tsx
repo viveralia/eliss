@@ -1,8 +1,8 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { FC } from "react";
-import { StrapiSocialNetwork } from "../../../types";
-import Footer from "./footer";
-import StreamingPlatformsModal from "./streamingPlatformsModal";
+
+import { StrapiSocialNetwork } from "~types";
+import { Footer, StreamingPlatformsModal } from "~components";
 
 export interface LayoutProps {
   socialNetworks: StrapiSocialNetwork[];

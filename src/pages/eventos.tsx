@@ -2,9 +2,9 @@ import { Container, Typography } from "@material-ui/core";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
-import { Event, Layout, PageHeader } from "../components";
-import { StrapiEvent, StrapiEventsPage, StrapiSocialNetwork } from "../types";
-import { fetchStrapi } from "../utils";
+import { Event, Layout, PageHeader } from "~components";
+import { StrapiEvent, StrapiEventsPage, StrapiSocialNetwork } from "~types";
+import { fetchStrapi } from "~utils";
 
 interface ServerProps {
   page: StrapiEventsPage;
@@ -17,7 +17,7 @@ const EventsPage: NextPage<ServerProps> = ({
   events,
   socialNetworks,
 }) => {
-  const comingEventsOnly = events.filter((event) => {
+  const comingEventsOnly = events.filter(event => {
     return new Date(event.ends) > new Date();
   });
 
@@ -40,7 +40,7 @@ const EventsPage: NextPage<ServerProps> = ({
       <PageHeader title={page.header.title} subtitle={page.header.subtitle} />
       <Container>
         {comingEventsOnly.length > 0 ? (
-          events.map((event) => <Event key={event.id} event={event} />)
+          events.map(event => <Event key={event.id} event={event} />)
         ) : (
           <Typography color="textSecondary">
             No hay eventos disponibles 😞
