@@ -8,6 +8,7 @@ export interface StrapiEventsPage {
 export interface StrapiHomePage {
   hero: StrapiHero;
   seo: StrapiSeo;
+  featuredVideo: string;
 }
 
 export interface StrapiMerchPage {

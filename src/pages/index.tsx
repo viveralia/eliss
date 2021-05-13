@@ -1,7 +1,7 @@
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
-import { ComingEvents, Contact, Hero, LastVideo, Layout, TopSongs } from "~components";
+import { ComingEvents, Contact, Hero, FeaturedVideo, Layout, TopSongs } from "~components";
 import {
   StrapiEvent,
   StrapiHomePage,
@@ -46,10 +46,7 @@ const HomePage: NextPage<ServerProps> = ({
       />
       <Hero headline={page.hero.headline} img={page.hero.img} />
       <TopSongs songs={songs} />
-      {/* 
-      // TODO: Move the hardcoded video to a custom field inside Strapi CMS  
-      */}
-      <LastVideo videoSrc="https://www.youtube.com/embed/0fO2t3Cid7c" />
+      <FeaturedVideo videoSrc={page.featuredVideo} channelHref="https://www.youtube.com/channel/UCWsFcpGSE3lVAh1PZK07lGw" />
       <ComingEvents events={comingEventsOnly} />
       <Contact />
     </Layout>

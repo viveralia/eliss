@@ -20,8 +20,18 @@ const INITIAL_STATE: ContactFormState = {
   feedbackMessage: null,
 };
 
-const useStyles = makeStyles(() => ({
-  form: {
+const useStyles = makeStyles((theme) => ({
+  button: {
+    display: "block",
+    margin: "1.75rem auto 0 auto",
+    textAlign: "center",
+    [theme.breakpoints.up("md")]: {
+      marginLeft: "auto",
+      marginRight: "auto",
+      maxWidth: "20rem",
+    },
+  },
+  formGrid: {
     display: "grid",
     gridTemplateColumns: "1fr",
     gap: "0.75rem",
@@ -49,68 +59,72 @@ const Contact: FC = () => {
 
   return (
     <Section title="Contacto" id="contacto">
-      <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-        <TextField
-          fullWidth
-          variant="outlined"
-          id="name"
-          name="name"
-          type="text"
-          label="Nombre"
-          error={!!errors.name}
-          helperText={errors.name?.message}
-          inputRef={register({
-            required: { value: true, message: messages.required },
-          })}
-        />
-        <TextField
-          fullWidth
-          variant="outlined"
-          id="email"
-          name="email"
-          type="email"
-          label="Correo electrónico"
-          error={!!errors.email}
-          helperText={errors.email?.message}
-          inputRef={register({
-            required: { value: true, message: messages.required },
-            pattern: { value: /^[^\s@]+@[^\s@]+$/, message: messages.email },
-          })}
-        />
-        <TextField
-          fullWidth
-          variant="outlined"
-          id="subject"
-          name="subject"
-          type="text"
-          label="Asunto"
-          error={!!errors.subject}
-          helperText={errors.subject?.message}
-          inputRef={register({
-            required: { value: true, message: messages.required },
-          })}
-        />
-        <TextField
-          fullWidth
-          variant="outlined"
-          id="message"
-          name="message"
-          type="text"
-          label="Mensaje"
-          multiline
-          rows={4}
-          error={!!errors.message}
-          helperText={errors.message?.message}
-          inputRef={register({
-            required: { value: true, message: messages.required },
-          })}
-        />
-        {state.success !== undefined && (
-          <Alert severity={state.success ? "success" : "error"}>
-            {state.feedbackMessage}
-          </Alert>
-        )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={classes.formGrid}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            id="name"
+            name="name"
+            type="text"
+            label="Nombre"
+            error={!!errors.name}
+            helperText={errors.name?.message}
+            inputRef={register({
+              required: { value: true, message: messages.required },
+            })}
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            id="email"
+            name="email"
+            type="email"
+            label="Correo electrónico"
+            error={!!errors.email}
+            helperText={errors.email?.message}
+            inputRef={register({
+              required: { value: true, message: messages.required },
+              pattern: { value: /^[^\s@]+@[^\s@]+$/, message: messages.email },
+            })}
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            id="subject"
+            name="subject"
+            type="text"
+            label="Asunto"
+            error={!!errors.subject}
+            helperText={errors.subject?.message}
+            inputRef={register({
+              required: { value: true, message: messages.required },
+            })}
+          />
+          <TextField
+            fullWidth
+            variant="outlined"
+            id="message"
+            name="message"
+            type="text"
+            label="Mensaje"
+            multiline
+            rows={4}
+            error={!!errors.message}
+            helperText={errors.message?.message}
+            inputRef={register({
+              required: { value: true, message: messages.required },
+            })}
+          />
+          {state.success !== undefined && (
+            <Alert severity={state.success ? "success" : "error"}>
+              {state.feedbackMessage}
+            </Alert>
+          )}
+        </div>
         <Button
+          className={classes.button}
+          fullWidth
           variant="contained"
           color="primary"
           type="submit"
