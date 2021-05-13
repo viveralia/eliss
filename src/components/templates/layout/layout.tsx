@@ -3,9 +3,8 @@ import { FC } from "react";
 
 import { StrapiSocialNetwork } from "~types";
 import { Footer, StreamingPlatformsModal } from "~components";
-
 export interface LayoutProps {
-  socialNetworks: StrapiSocialNetwork[];
+  socialNetworks: Pick<StrapiSocialNetwork, "id" | "name" | "link" | "footer" | "streaming">[];
 }
 
 const useStyles = makeStyles(theme => ({

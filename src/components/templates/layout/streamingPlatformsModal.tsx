@@ -13,7 +13,7 @@ import { StreamingModalContext } from "~context";
 import { StrapiSocialNetwork } from "~types";
 
 interface StreamingPlatformsModalProps {
-  streamingPlatforms: StrapiSocialNetwork[];
+  streamingPlatforms: Pick<StrapiSocialNetwork, "id" | "name" | "link">[];
 }
 
 const useStyles = makeStyles(theme => ({

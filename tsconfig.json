@@ -8,6 +8,8 @@
       "~constants/*": ["src/constants/*"],
       "~context": ["src/context"],
       "~context/*": ["src/context/*"],
+      "~graphql": ["src/graphql"],
+      "~graphql/*": ["src/graphql/*"],
       "~reducers": ["src/reducers"],
       "~reducers/*": ["src/reducers/*"],
       "~services": ["src/services"],

@@ -5,7 +5,7 @@ import { StrapiEvent } from "~types";
 import { LiveBadge, RevealOnScroll } from "~components";
 
 export interface EventProps {
-  event: StrapiEvent;
+  event: Pick<StrapiEvent, "name" | "link" | "place" | "starts" | "ends">;
 }
 
 const DATE_REFRESH_TIME_IN_MS = 5000;

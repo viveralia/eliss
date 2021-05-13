@@ -1,18 +1,13 @@
 import { Container, Typography } from "@material-ui/core";
+import gql from "graphql-tag";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
 import { Event, Layout, PageHeader } from "~components";
-import { StrapiEvent, StrapiEventsPage, StrapiSocialNetwork } from "~types";
-import { fetchStrapi } from "~utils";
+import { client } from "~graphql";
+import { EventsPageQuery } from "~types/EventsPageQuery";
 
-interface ServerProps {
-  page: StrapiEventsPage;
-  events: StrapiEvent[];
-  socialNetworks: StrapiSocialNetwork[];
-}
-
-const EventsPage: NextPage<ServerProps> = ({
+const EventsPage: NextPage<EventsPageQuery> = ({
   page,
   events,
   socialNetworks,
@@ -53,14 +48,45 @@ const EventsPage: NextPage<ServerProps> = ({
 
 export default EventsPage;
 
+const eventsPageQuery = gql`
+  query EventsPageQuery {
+    page: eventsPage {
+      seo {
+        metaTitle
+        metaDescription
+        shareImg {
+          alternativeText
+          formats
+        }
+      }
+      header {
+        title
+        subtitle
+      }
+    }
+    events {
+      id
+      name
+      link
+      place
+      starts
+      ends
+    }
+    socialNetworks {
+      id
+      name
+      link
+      footer
+      streaming
+    }
+  }
+`;
+
 export const getStaticProps: GetStaticProps = async () => {
-  const [page, events, socialNetworks] = await Promise.all([
-    fetchStrapi("/events-page"),
-    fetchStrapi("/events"),
-    fetchStrapi("/social-networks"),
-  ]);
+  const { data } = await client.query<EventsPageQuery>({ query: eventsPageQuery })
 
   return {
-    props: { page, events, socialNetworks },
+    props: { ...data },
+    revalidate: 1000 * 60, // each minute
   };
 };

@@ -6,7 +6,7 @@ import { Section, Song } from "~components";
 import { StrapiSong } from "~types";
 
 export interface TopSongsProps {
-  songs: StrapiSong[];
+  songs: Pick<StrapiSong, "id" | "spotifyUri">[];
 }
 
 const useStyles = makeStyles(theme => ({

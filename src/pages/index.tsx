@@ -1,23 +1,12 @@
+import { gql } from "@apollo/client";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
 import { ComingEvents, Contact, Hero, FeaturedVideo, Layout, TopSongs } from "~components";
-import {
-  StrapiEvent,
-  StrapiHomePage,
-  StrapiSocialNetwork,
-  StrapiSong,
-} from "~types";
-import { fetchStrapi } from "~utils";
+import { client } from "~graphql";
+import { HomePageQuery } from "~types/HomePageQuery";
 
-interface ServerProps {
-  page: StrapiHomePage;
-  songs: StrapiSong[];
-  events: StrapiEvent[];
-  socialNetworks: StrapiSocialNetwork[];
-}
-
-const HomePage: NextPage<ServerProps> = ({
+const HomePage: NextPage<HomePageQuery> = ({
   page,
   songs,
   events,
@@ -55,15 +44,53 @@ const HomePage: NextPage<ServerProps> = ({
 
 export default HomePage;
 
+const homePageQuery = gql`
+  query HomePageQuery {
+    page: homePage {
+      seo {
+        metaTitle
+        metaDescription
+        shareImg {
+          alternativeText
+          formats
+        }
+      }
+      hero {
+        headline
+        img {
+          alternativeText
+          url
+        }
+      }
+      featuredVideo
+    }
+    songs(limit: 6, where: { featured: true }) {
+      id
+      spotifyUri
+    }
+    events(limit: 5, sort: "starts") {
+      id
+      name
+      link
+      place
+      starts
+      ends
+    }
+    socialNetworks {
+      id
+      name
+      link
+      footer
+      streaming
+    }
+  }
+`
+
 export const getStaticProps: GetStaticProps = async () => {
-  const [page, songs, events, socialNetworks] = await Promise.all([
-    fetchStrapi("/home-page"),
-    fetchStrapi("/songs", { _limit: 6, featured: true }),
-    fetchStrapi("/events", { _limit: 5, _sort: "starts" }),
-    fetchStrapi("/social-networks"),
-  ]);
+  const { data } = await client.query<HomePageQuery>({ query: homePageQuery });
 
   return {
-    props: { page, songs, events, socialNetworks },
+    props: { ...data },
+    revalidate: 1000 * 60, // each minute
   };
 };

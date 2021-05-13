@@ -1,16 +1,12 @@
 import { Container, makeStyles } from "@material-ui/core";
+import gql from "graphql-tag";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Markdown from "react-markdown";
 
 import { Layout, PageHeader } from "~components";
-import { StrapiPresskitPage, StrapiSocialNetwork } from "~types";
-import { fetchStrapi } from "~utils";
-
-interface ServerProps {
-  page: StrapiPresskitPage;
-  socialNetworks: StrapiSocialNetwork[];
-}
+import { client } from "~graphql";
+import { PresskitPageQuery } from "~types/PresskitPageQuery";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -42,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const PresskitPage: NextPage<ServerProps> = ({ page, socialNetworks }) => {
+const PresskitPage: NextPage<PresskitPageQuery> = ({ page, socialNetworks }) => {
   const classes = useStyles();
 
   return (
@@ -71,13 +67,38 @@ const PresskitPage: NextPage<ServerProps> = ({ page, socialNetworks }) => {
 
 export default PresskitPage;
 
+const presskitPageQuery = gql`
+  query PresskitPageQuery {
+    page: presskitPage {
+      seo {
+        metaTitle
+        metaDescription
+        shareImg {
+          alternativeText
+          formats
+        }
+      }
+      header {
+        title
+        subtitle
+      }
+      content
+    }
+    socialNetworks {
+      id
+      name
+      link
+      footer
+      streaming
+    }
+  }
+`
+
 export const getStaticProps: GetStaticProps = async () => {
-  const [page, socialNetworks] = await Promise.all([
-    fetchStrapi("/presskit-page"),
-    fetchStrapi("/social-networks"),
-  ]);
+  const { data } = await client.query<PresskitPageQuery>({ query: presskitPageQuery })
 
   return {
-    props: { page, socialNetworks },
+    props: { ...data },
+    revalidate: 1000 * 60, // each minute
   };
 };

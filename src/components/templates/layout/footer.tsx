@@ -6,7 +6,7 @@ import { StrapiSocialNetwork } from "~types";
 import { SocialNetwork } from "~components";
 
 export interface FooterProps {
-  socialNetworks: StrapiSocialNetwork[];
+  socialNetworks: Pick<StrapiSocialNetwork, "id" | "name" | "link">[];
   className?: string;
 }
 

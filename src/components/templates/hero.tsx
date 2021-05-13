@@ -12,7 +12,7 @@ import { FC } from "react";
 import { StrapiCloudinaryImage } from "~types";
 
 export interface HeroProps {
-  img: StrapiCloudinaryImage;
+  img: Pick<StrapiCloudinaryImage, "url" | "alternativeText">;
   headline: string;
 }
 

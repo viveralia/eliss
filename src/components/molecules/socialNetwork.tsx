@@ -5,7 +5,7 @@ import catalog from "~constants/brandsCatalog";
 import { StrapiSocialNetwork } from "~types";
 
 export interface SocialNetworkProps {
-  network: StrapiSocialNetwork;
+  network: Pick<StrapiSocialNetwork, "name" | "link">;
 }
 
 const useStyles = makeStyles(theme => ({

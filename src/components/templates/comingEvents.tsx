@@ -6,7 +6,7 @@ import { Event, Section } from "~components";
 import { StrapiEvent } from "~types";
 
 export interface ComingEventsProps {
-  events: StrapiEvent[];
+  events: Pick<StrapiEvent, "id" | "name" | "link" | "place" | "starts" | "ends">[];
 }
 
 const useStyles = makeStyles(theme => ({
