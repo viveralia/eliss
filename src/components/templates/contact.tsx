@@ -1,7 +1,7 @@
 import { Button, makeStyles, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import { FC, useReducer } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 import { Section } from "~components";
 import { contactFormReducer, ContactFormState } from "~reducers";
@@ -20,7 +20,7 @@ const INITIAL_STATE: ContactFormState = {
   feedbackMessage: null,
 };
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   button: {
     display: "block",
     margin: "1.75rem auto 0 auto",
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Contact: FC = () => {
   const classes = useStyles();
-  const { register, errors, handleSubmit, formState, reset } = useForm();
+  const { control, handleSubmit, formState, reset } = useForm();
   const [state, dispatch] = useReducer(contactFormReducer, INITIAL_STATE);
 
   async function onSubmit(data: FormData) {
@@ -61,60 +61,98 @@ const Contact: FC = () => {
     <Section title="Contacto" id="contacto">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={classes.formGrid}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            id="name"
+          <Controller
             name="name"
-            type="text"
-            label="Nombre"
-            error={!!errors.name}
-            helperText={errors.name?.message}
-            inputRef={register({
-              required: { value: true, message: messages.required },
-            })}
+            control={control}
+            defaultValue=""
+            rules={{ required: { value: true, message: messages.required } }}
+            render={({
+              field: { ref, ...fieldProps },
+              fieldState: { error },
+            }) => (
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="name"
+                type="text"
+                label="Nombre"
+                inputRef={ref}
+                error={!!error}
+                helperText={error ? error.message : null}
+                {...fieldProps}
+              />
+            )}
           />
-          <TextField
-            fullWidth
-            variant="outlined"
-            id="email"
+          <Controller
             name="email"
-            type="email"
-            label="Correo electrónico"
-            error={!!errors.email}
-            helperText={errors.email?.message}
-            inputRef={register({
+            control={control}
+            defaultValue=""
+            rules={{
               required: { value: true, message: messages.required },
               pattern: { value: /^[^\s@]+@[^\s@]+$/, message: messages.email },
-            })}
+            }}
+            render={({
+              field: { ref, ...fieldProps },
+              fieldState: { error },
+            }) => (
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="email"
+                type="email"
+                label="Correo electrónico"
+                inputRef={ref}
+                error={!!error}
+                helperText={error ? error.message : null}
+                {...fieldProps}
+              />
+            )}
           />
-          <TextField
-            fullWidth
-            variant="outlined"
-            id="subject"
+          <Controller
             name="subject"
-            type="text"
-            label="Asunto"
-            error={!!errors.subject}
-            helperText={errors.subject?.message}
-            inputRef={register({
-              required: { value: true, message: messages.required },
-            })}
+            control={control}
+            defaultValue=""
+            rules={{ required: { value: true, message: messages.required } }}
+            render={({
+              field: { ref, ...fieldProps },
+              fieldState: { error },
+            }) => (
+              <TextField
+                fullWidth
+                variant="outlined"
+                id="subject"
+                type="text"
+                label="Asunto"
+                inputRef={ref}
+                error={!!error}
+                helperText={error ? error.message : null}
+                {...fieldProps}
+              />
+            )}
           />
-          <TextField
-            fullWidth
-            variant="outlined"
-            id="message"
+          <Controller
             name="message"
-            type="text"
-            label="Mensaje"
-            multiline
-            rows={4}
-            error={!!errors.message}
-            helperText={errors.message?.message}
-            inputRef={register({
-              required: { value: true, message: messages.required },
-            })}
+            control={control}
+            defaultValue=""
+            rules={{ required: { value: true, message: messages.required } }}
+            render={({
+              field: { ref, ...fieldProps },
+              fieldState: { error },
+            }) => (
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                variant="outlined"
+                id="message"
+                type="text"
+                label="Mensaje"
+                inputRef={ref}
+                error={!!error}
+                helperText={error ? error.message : null}
+                {...fieldProps}
+              />
+            )}
           />
           {state.success !== undefined && (
             <Alert severity={state.success ? "success" : "error"}>
