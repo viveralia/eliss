@@ -5,7 +5,7 @@ import catalog from "~constants/brandsCatalog";
 import { StrapiSocialNetwork } from "~types";
 
 export interface StreamingPlatformProps {
-  platform: StrapiSocialNetwork;
+  platform: Pick<StrapiSocialNetwork, "id" | "name" | "link">;
 }
 
 const useStyles = makeStyles(theme => ({
