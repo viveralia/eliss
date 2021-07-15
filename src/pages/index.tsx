@@ -2,7 +2,14 @@ import { gql } from "@apollo/client";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
-import { ComingEvents, Contact, Hero, FeaturedVideo, Layout, TopSongs } from "~components";
+import {
+  ComingEvents,
+  Contact,
+  Hero,
+  FeaturedVideo,
+  Layout,
+  TopSongs,
+} from "~components";
 import { client } from "~graphql";
 import { HomePageQuery } from "~types/HomePageQuery";
 
@@ -35,7 +42,10 @@ const HomePage: NextPage<HomePageQuery> = ({
       />
       <Hero headline={page.hero.headline} img={page.hero.img} />
       <TopSongs songs={songs} />
-      <FeaturedVideo videoSrc={page.featuredVideo} channelHref="https://www.youtube.com/channel/UCWsFcpGSE3lVAh1PZK07lGw" />
+      <FeaturedVideo
+        videoSrc={page.featuredVideo}
+        channelHref="https://www.youtube.com/channel/UCWsFcpGSE3lVAh1PZK07lGw"
+      />
       <ComingEvents events={comingEventsOnly} />
       <Contact />
     </Layout>
@@ -84,7 +94,7 @@ const homePageQuery = gql`
       streaming
     }
   }
-`
+`;
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query<HomePageQuery>({ query: homePageQuery });

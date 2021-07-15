@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   },
   listItem: {
     "&:last-child": {
-      marginBottom: "2rem",
+      marginBottom: "0",
     },
     marginBottom: "0.75rem",
   },
@@ -26,11 +26,15 @@ const useStyles = makeStyles(theme => ({
 
 const StreamingPlatform: FC<StreamingPlatformProps> = ({ platform }) => {
   const classes = useStyles();
-  const { Icon, color } = catalog[platform.name];
+  const { Icon, color, name } = catalog[platform.name];
 
   return (
     <li className={classes.listItem}>
       <Button
+        fullWidth
+        disableElevation
+        color="primary"
+        variant="contained"
         component="a"
         rel="noopener noreferrer"
         target="_blank"
@@ -40,7 +44,7 @@ const StreamingPlatform: FC<StreamingPlatformProps> = ({ platform }) => {
           style={{ color: color || "inherit" }}
           className={classes.platform}
         />{" "}
-        Escuchar en {platform.name}
+        Escuchar en {name}
       </Button>
     </li>
   );

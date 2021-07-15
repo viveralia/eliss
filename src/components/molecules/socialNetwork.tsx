@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 
 const SocialNetwork: FC<SocialNetworkProps> = ({ network }) => {
   const classes = useStyles();
-  const { Icon } = catalog[network.name];
+  const { Icon, name } = catalog[network.name];
 
   return (
     <li className={classes.listItem}>
@@ -40,7 +40,7 @@ const SocialNetwork: FC<SocialNetworkProps> = ({ network }) => {
         href={network.link}
         target="_blank"
         rel="noopener noreferrer"
-        title={`Ir al ${network.name} de Eliss`}
+        title={`Ir al ${name} de Eliss`}
         className={classes.link}
       >
         <Icon />

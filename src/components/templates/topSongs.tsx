@@ -15,9 +15,11 @@ const useStyles = makeStyles(theme => ({
     gridTemplateColumns: "1fr",
     gap: "1rem",
     [theme.breakpoints.up("md")]: {
-      gap: "2rem",
-      columnGap: "5rem",
+      columnGap: "3rem",
       gridTemplateColumns: "1fr 1fr",
+    },
+    [theme.breakpoints.up("xl")]: {
+      columnGap: "4rem",
     },
   },
   button: {
