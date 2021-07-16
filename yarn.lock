@@ -1073,16 +1073,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fontsource/ibm-plex-sans@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@fontsource/ibm-plex-sans/-/ibm-plex-sans-4.2.2.tgz#0cc4456cfb1b01b5675d6a09fca8a3fbab6bd37e"
-  integrity sha512-RnUdFtHJcWtidq2/MOfqWHUGmMyhUOLJ3CMFL/rFg9tC8QAYthzLSAzwxagaCq31Ej+4HAIS6PDYnaNGC/YhAA==
-
-"@fontsource/oswald@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@fontsource/oswald/-/oswald-4.2.2.tgz#2d57109b9c40fb7b7be8e988c997480e3b784323"
-  integrity sha512-QQ7U3gPZLezZz5zwZOuhfDKX4bgpkO98iGTatElZ2HRRA20y2Kk4qZmAh4nXnJnt3KJPzAYktNeDpZIT7H/4tQ==
-
 "@graphql-typed-document-node/core@^3.0.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.0.tgz#0eee6373e11418bfe0b5638f654df7a4ca6a3950"
