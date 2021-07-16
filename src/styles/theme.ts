@@ -1,5 +1,3 @@
-import "@fontsource/ibm-plex-sans/500.css";
-import "@fontsource/oswald/500.css";
 import {
   createMuiTheme,
   responsiveFontSizes,

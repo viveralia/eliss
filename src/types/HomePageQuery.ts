@@ -25,6 +25,7 @@ export interface HomePageQuery_page_seo {
 export interface HomePageQuery_page_hero_img {
   __typename: "UploadFile";
   alternativeText: string | null;
+  hash: string;
   url: string;
 }
 

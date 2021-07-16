@@ -8,7 +8,7 @@ export interface FeaturedVideoProps {
   channelHref: string;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   button: {
     display: "block",
     margin: "1.75rem auto 0 auto",
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   videoWrapper: {
     position: "relative",
-    paddingBottom: "56.25%", /* 16:9 */
+    paddingBottom: "56.25%" /* 16:9 */,
     height: 0,
     "& > iframe": {
       position: "absolute",
@@ -40,14 +40,16 @@ const FeaturedVideo: FC<FeaturedVideoProps> = ({ videoSrc, channelHref }) => {
     <Section title="Videos musicales">
       <Box maxWidth={800} margin="auto">
         <div className={classes.videoWrapper}>
-        <iframe
-          width="560" 
-          height="315" 
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-          allowFullScreen 
-          src={videoSrc} 
-          frameBorder="0" />
-      </div>
+          <iframe
+            loading="lazy"
+            width="560"
+            height="315"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            src={videoSrc}
+            frameBorder="0"
+          />
+        </div>
       </Box>
       <Button
         component="a"
@@ -63,7 +65,7 @@ const FeaturedVideo: FC<FeaturedVideoProps> = ({ videoSrc, channelHref }) => {
         Más videos
       </Button>
     </Section>
-  )
-}
+  );
+};
 
 export default FeaturedVideo;

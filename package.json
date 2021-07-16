@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "cm": "git-cz",
-    "codegen": "apollo client:codegen --target typescript --endpoint=http://localhost:1337/graphql --outputFlat --includes \"{pages,src}/**\" --excludes \"src/types\" src/types"
+    "codegen": "apollo client:codegen --target typescript --endpoint=https://eliss-cms.herokuapp.com/graphql --outputFlat --includes \"{pages,src}/**\" --excludes \"src/types\" src/types"
   },
   "dependencies": {
     "@apollo/client": "^3.3.17",
@@ -21,6 +21,7 @@
     "framer-motion": "^3.10.3",
     "graphql": "^15.5.0",
     "next": "^11.0.1",
+    "next-pwa": "^5.2.23",
     "next-seo": "^4.20.0",
     "polished": "^4.1.1",
     "react": "^17.0.2",

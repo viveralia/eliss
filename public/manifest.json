@@ -1,0 +1,32 @@
+{
+  "theme_color": "#3a3a3a",
+  "background_color": "#212121",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "Eliss",
+  "short_name": "Eliss",
+  "description": "Eliss es una banda de la Ciudad de México, con dos EP, uno grabado en 2017 llamado El comienzo y El último suspiro.",
+  "icons": [
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
