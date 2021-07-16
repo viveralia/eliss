@@ -16,6 +16,7 @@
     "@material-ui/core": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@sendgrid/mail": "^7.4.2",
+    "cloudinary-build-url": "^0.2.1",
     "clsx": "^1.1.1",
     "framer-motion": "^3.10.3",
     "graphql": "^15.5.0",

@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     backdropFilter: "blur(8px)",
-    backgroundColor: transparentize(0.25, theme.palette.background.default),
+    backgroundColor: transparentize(0.05, theme.palette.background.default),
     left: 0,
     position: "fixed",
     top: 0,

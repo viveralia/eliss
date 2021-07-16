@@ -19,6 +19,7 @@ interface StrapiImage {
 export interface StrapiCloudinaryImage extends StrapiImage {
   alternativeText: string;
   caption: string;
+  hash: string;
   provider: string;
   related: unknown[];
   url: string;

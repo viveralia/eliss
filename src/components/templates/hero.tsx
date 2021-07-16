@@ -8,11 +8,12 @@ import {
 import Img from "next/image";
 import NextLink from "next/link";
 import { FC } from "react";
+import { buildUrl } from "cloudinary-build-url";
 
 import { StrapiCloudinaryImage } from "~types";
 
 export interface HeroProps {
-  img: Pick<StrapiCloudinaryImage, "url" | "alternativeText">;
+  img: Pick<StrapiCloudinaryImage, "url" | "alternativeText" | "hash">;
   headline: string;
 }
 
@@ -75,6 +76,7 @@ const useStyles = makeStyles(theme => ({
   imgContainer: {
     position: "relative",
     height: 220,
+    backgroundColor: "#212121",
     [theme.breakpoints.up("md")]: {
       height: 450,
     },
@@ -109,6 +111,16 @@ const Hero: FC<HeroProps> = ({ img, headline }) => {
           layout="fill"
           objectFit="cover"
           className={classes.img}
+          placeholder="blur"
+          blurDataURL={buildUrl(img.hash, {
+            cloud: {
+              cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_NAME!,
+            },
+            transformations: {
+              effect: "blur:1000",
+              quality: 1,
+            },
+          })}
         />
       </div>
       <Box className={classes.colorContainer}>

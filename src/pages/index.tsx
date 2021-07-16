@@ -69,6 +69,7 @@ const homePageQuery = gql`
         headline
         img {
           alternativeText
+          hash
           url
         }
       }
