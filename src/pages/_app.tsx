@@ -34,7 +34,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
+          content="black"
         />
         <link href="icons/icon-512x512.png" rel="apple-touch-icon" />
         <link href="/manifest.json" rel="manifest" />
