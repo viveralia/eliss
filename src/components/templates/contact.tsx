@@ -16,8 +16,8 @@ interface FormData {
 }
 
 const INITIAL_STATE: ContactFormState = {
-  success: undefined,
   feedbackMessage: null,
+  success: undefined,
 };
 
 const useStyles = makeStyles(theme => ({
@@ -33,10 +33,10 @@ const useStyles = makeStyles(theme => ({
   },
   formGrid: {
     display: "grid",
-    gridTemplateColumns: "1fr",
     gap: "0.75rem",
-    maxWidth: "40rem",
+    gridTemplateColumns: "1fr",
     margin: "auto",
+    maxWidth: "40rem",
   },
 }));
 
@@ -53,6 +53,7 @@ const Contact: FC = () => {
       dispatch({ type: "EMAIL_SENT_SUCCESS" });
     } catch (error) {
       dispatch({ type: "EMAIL_SENT_FAILURE" });
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   }
@@ -65,11 +66,8 @@ const Contact: FC = () => {
             name="name"
             control={control}
             defaultValue=""
-            rules={{ required: { value: true, message: messages.required } }}
-            render={({
-              field: { ref, ...fieldProps },
-              fieldState: { error },
-            }) => (
+            rules={{ required: { message: messages.required, value: true } }}
+            render={({ field: { ref, ...fieldProps }, fieldState: { error } }) => (
               <TextField
                 fullWidth
                 variant="outlined"
@@ -88,13 +86,10 @@ const Contact: FC = () => {
             control={control}
             defaultValue=""
             rules={{
-              required: { value: true, message: messages.required },
-              pattern: { value: /^[^\s@]+@[^\s@]+$/, message: messages.email },
+              pattern: { message: messages.email, value: /^[^\s@]+@[^\s@]+$/ },
+              required: { message: messages.required, value: true },
             }}
-            render={({
-              field: { ref, ...fieldProps },
-              fieldState: { error },
-            }) => (
+            render={({ field: { ref, ...fieldProps }, fieldState: { error } }) => (
               <TextField
                 fullWidth
                 variant="outlined"
@@ -112,11 +107,8 @@ const Contact: FC = () => {
             name="subject"
             control={control}
             defaultValue=""
-            rules={{ required: { value: true, message: messages.required } }}
-            render={({
-              field: { ref, ...fieldProps },
-              fieldState: { error },
-            }) => (
+            rules={{ required: { message: messages.required, value: true } }}
+            render={({ field: { ref, ...fieldProps }, fieldState: { error } }) => (
               <TextField
                 fullWidth
                 variant="outlined"
@@ -134,11 +126,8 @@ const Contact: FC = () => {
             name="message"
             control={control}
             defaultValue=""
-            rules={{ required: { value: true, message: messages.required } }}
-            render={({
-              field: { ref, ...fieldProps },
-              fieldState: { error },
-            }) => (
+            rules={{ required: { message: messages.required, value: true } }}
+            render={({ field: { ref, ...fieldProps }, fieldState: { error } }) => (
               <TextField
                 fullWidth
                 multiline
@@ -155,9 +144,7 @@ const Contact: FC = () => {
             )}
           />
           {state.success !== undefined && (
-            <Alert severity={state.success ? "success" : "error"}>
-              {state.feedbackMessage}
-            </Alert>
+            <Alert severity={state.success ? "success" : "error"}>{state.feedbackMessage}</Alert>
           )}
         </div>
         <Button

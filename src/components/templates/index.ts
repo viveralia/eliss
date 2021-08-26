@@ -6,7 +6,7 @@ export { default as Contact } from "./contact";
 export { default as Hero } from "./hero";
 export * from "./hero";
 
-export { default as FeaturedVideo } from "./featuredVideo"
+export { default as FeaturedVideo } from "./featuredVideo";
 
 export * from "./layout";
 

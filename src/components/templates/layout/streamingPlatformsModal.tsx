@@ -1,10 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
+import { Dialog, DialogContent, DialogTitle, makeStyles, Typography } from "@material-ui/core";
 import { useRouter } from "next/router";
 import { FC, useCallback, useContext, useEffect } from "react";
 
@@ -28,17 +22,15 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     fontSize: "0.8125rem",
-    textTransform: "uppercase",
     lineHeight: 1.5,
+    textTransform: "uppercase",
     [theme.breakpoints.up("md")]: {
       fontSize: "1rem",
     },
   },
 }));
 
-const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({
-  streamingPlatforms,
-}) => {
+const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({ streamingPlatforms }) => {
   const classes = useStyles();
   const { state, dispatch } = useContext(StreamingModalContext);
   const router = useRouter();
@@ -49,7 +41,7 @@ const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({
     } else {
       dispatch({ type: "HIDE_STREAMING_PLATFORMS" });
     }
-  }, [router]);
+  }, [router, dispatch]);
 
   const handleClose = useCallback(() => {
     const url = new URL(window?.location.href);
@@ -64,12 +56,7 @@ const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({
       PaperProps={{ className: classes.dialogPaper }}
     >
       <DialogTitle>
-        <Typography
-          variant="h3"
-          color="textSecondary"
-          className={classes.title}
-          align="center"
-        >
+        <Typography variant="h3" color="textSecondary" className={classes.title} align="center">
           Selecciona tu plataforma de streaming
         </Typography>
       </DialogTitle>
@@ -82,7 +69,7 @@ const StreamingPlatformsModal: FC<StreamingPlatformsModalProps> = ({
           </ul>
         ) : (
           <Typography align="center" color="textSecondary">
-            No hay plataformas disponibles 😞
+            No hay plataformas disponibles
           </Typography>
         )}
       </DialogContent>

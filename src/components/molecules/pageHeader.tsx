@@ -2,8 +2,8 @@ import { Container, makeStyles, Typography } from "@material-ui/core";
 import { FC } from "react";
 
 export interface PageHeaderProps {
-  title: string;
   subtitle: string;
+  title: string;
 }
 
 const useStyles = makeStyles(theme => ({

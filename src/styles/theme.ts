@@ -1,8 +1,4 @@
-import {
-  createMuiTheme,
-  responsiveFontSizes,
-  ThemeOptions,
-} from "@material-ui/core";
+import { createMuiTheme, responsiveFontSizes, ThemeOptions } from "@material-ui/core";
 import { TypographyStyleOptions } from "@material-ui/core/styles/createTypography";
 
 /**********************************/
@@ -22,11 +18,13 @@ const bodyStyles: TypographyStyleOptions = {
 
 const headlineStyles: TypographyStyleOptions = {
   fontFamily: joinFonts(HEADLINE_FONT),
-  textTransform: "uppercase",
   fontWeight: 500,
+  textTransform: "uppercase",
 };
 
 const typography: ThemeOptions["typography"] = {
+  body1: bodyStyles,
+  body2: bodyStyles,
   fontFamily: joinFonts(BODY_FONT),
   h1: headlineStyles,
   h2: headlineStyles,
@@ -34,15 +32,12 @@ const typography: ThemeOptions["typography"] = {
   h4: headlineStyles,
   h5: headlineStyles,
   h6: headlineStyles,
-  body1: bodyStyles,
-  body2: bodyStyles,
 };
 
 /**********************************/
 /************** Base **************/
 /**********************************/
 const baseTheme: ThemeOptions = {
-  typography,
   overrides: {
     MuiButton: {
       root: {
@@ -51,6 +46,7 @@ const baseTheme: ThemeOptions = {
       },
     },
   },
+  typography,
 };
 
 /**********************************/
@@ -59,26 +55,26 @@ const baseTheme: ThemeOptions = {
 const nonResponsiveLightTheme = createMuiTheme({
   ...baseTheme,
   palette: {
-    type: "light",
+    divider: "rgba(0,0,0,0.0725)",
     primary: {
       main: "#3A3A3A",
     },
-    divider: "rgba(0,0,0,0.0725)",
+    type: "light",
   },
 });
 
 const nonResponsiveDarkTheme = createMuiTheme({
   ...baseTheme,
   palette: {
-    type: "dark",
+    background: {
+      default: "#101010",
+      paper: "#212121",
+    },
+    divider: "rgba(255, 255, 255, 0.125)",
     primary: {
       main: "#FBFBFB",
     },
-    divider: "rgba(255, 255, 255, 0.125)",
-    background: {
-      paper: "#212121",
-      default: "#101010",
-    },
+    type: "dark",
   },
 });
 

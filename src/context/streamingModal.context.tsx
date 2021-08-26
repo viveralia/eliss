@@ -7,13 +7,11 @@ import {
 } from "~reducers";
 
 interface StreamingModalContextValue {
-  state: StreamingModalPlatformState;
   dispatch: Dispatch<StreamingModalPlatformAction>;
+  state: StreamingModalPlatformState;
 }
 
-export const StreamingModalContext = createContext(
-  {} as StreamingModalContextValue
-);
+export const StreamingModalContext = createContext({} as StreamingModalContextValue);
 
 export const StreamingModalContextProvider: FC = ({ children }) => {
   const [state, dispatch] = useReducer(streamingModalReducer, {
@@ -21,12 +19,8 @@ export const StreamingModalContextProvider: FC = ({ children }) => {
   });
 
   const value = useMemo(() => {
-    return { state, dispatch };
+    return { dispatch, state };
   }, [state]);
 
-  return (
-    <StreamingModalContext.Provider value={value}>
-      {children}
-    </StreamingModalContext.Provider>
-  );
+  return <StreamingModalContext.Provider value={value}>{children}</StreamingModalContext.Provider>;
 };

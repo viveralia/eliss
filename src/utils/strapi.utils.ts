@@ -5,18 +5,18 @@ const getStrapiUrl = (path = "") => {
 
 const buildUrlWithParams = (url: string, params: Record<string, unknown>) => {
   const query = new URLSearchParams();
-  Object.keys(params).forEach((key) => {
+  Object.keys(params).forEach(key => {
     query.append(key, params[key].toString());
   });
   return url + "?" + query.toString();
 };
 
 export interface StrapiParams {
+  [param: string]: unknown;
   _limit?: unknown;
+  _ne?: unknown;
   _sort?: unknown;
   _start?: unknown;
-  _ne?: unknown;
-  [param: string]: unknown;
 }
 
 export const fetchStrapi = async (path = "", params?: StrapiParams) => {

@@ -1,4 +1,4 @@
-export default [
+const navbarLinks = [
   {
     name: "Presskit",
     path: "/presskit",
@@ -16,3 +16,5 @@ export default [
     path: "/#contacto",
   },
 ];
+
+export default navbarLinks;

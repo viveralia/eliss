@@ -3,8 +3,8 @@ import { FC } from "react";
 import { useInView } from "react-intersection-observer";
 
 export interface RevealOnScrollProps {
-  variants?: AnimationProps["variants"];
   transition?: AnimationProps["transition"];
+  variants?: AnimationProps["variants"];
 }
 
 const DEAFULT_VARIANTS = {

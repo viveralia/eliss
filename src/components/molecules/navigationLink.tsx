@@ -5,6 +5,30 @@ import { useRouter } from "next/router";
 import { FC } from "react";
 
 const useStyles = makeStyles(theme => ({
+  active: {
+    color: theme.palette.text.primary,
+    opacity: 1,
+  },
+  button: {
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+    outline: "none",
+    padding: 0,
+  },
+  link: {
+    "&:hover, &:active": {
+      color: theme.palette.text.primary,
+      opacity: 1,
+    },
+    color: theme.palette.text.secondary,
+    fontFamily: theme.typography.h1.fontFamily,
+    fontSize: "0.875rem",
+    fontWeight: theme.typography.h1.fontWeight,
+    opacity: 0.875,
+    textTransform: theme.typography.h1.textTransform,
+    transition: "all 0.2s ease",
+  },
   listItem: {
     "&:last-child": {
       marginRight: "1rem",
@@ -13,46 +37,22 @@ const useStyles = makeStyles(theme => ({
       },
     },
     display: "inline-block",
-    marginRight: "1.25rem",
     marginLeft: "1rem",
-    paddingTop: "0.5rem",
+    marginRight: "1.25rem",
     paddingBottom: "0.5rem",
+    paddingTop: "0.5rem",
     [theme.breakpoints.up("md")]: {
-      paddingTop: 0,
-      paddingBottom: 0,
       marginLeft: 0,
+      paddingBottom: 0,
+      paddingTop: 0,
     },
-  },
-  link: {
-    fontSize: "0.875rem",
-    fontWeight: theme.typography.h1.fontWeight,
-    transition: "all 0.2s ease",
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: theme.typography.h1.textTransform,
-    color: theme.palette.text.secondary,
-    opacity: 0.875,
-    "&:hover, &:active": {
-      color: theme.palette.text.primary,
-      opacity: 1,
-    },
-  },
-  active: {
-    color: theme.palette.text.primary,
-    opacity: 1,
-  },
-  button: {
-    border: "none",
-    background: "transparent",
-    cursor: "pointer",
-    padding: 0,
-    outline: "none",
   },
 }));
 
 export interface NavigationLinkProps {
   navItem: {
-    path: string;
     name: string;
+    path: string;
   };
 }
 
@@ -76,8 +76,8 @@ export const NavigationLink: FC<NavigationLinkProps> = ({ navItem }) => {
 
 export interface NavigationButtonProps {
   navItem: {
-    onClick: () => void;
     name: string;
+    onClick: () => void;
   };
 }
 
@@ -86,10 +86,7 @@ export const NavigationButton: FC<NavigationButtonProps> = ({ navItem }) => {
 
   return (
     <li className={classes.listItem}>
-      <button
-        className={clsx(classes.button, classes.link)}
-        onClick={navItem.onClick}
-      >
+      <button className={clsx(classes.button, classes.link)} onClick={navItem.onClick}>
         {navItem.name}
       </button>
     </li>
