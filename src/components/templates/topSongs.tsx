@@ -10,18 +10,6 @@ export interface TopSongsProps {
 }
 
 const useStyles = makeStyles(theme => ({
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: "1rem",
-    [theme.breakpoints.up("md")]: {
-      columnGap: "3rem",
-      gridTemplateColumns: "1fr 1fr",
-    },
-    [theme.breakpoints.up("xl")]: {
-      columnGap: "4rem",
-    },
-  },
   button: {
     display: "block",
     margin: "1.75rem auto 0 auto",
@@ -34,6 +22,18 @@ const useStyles = makeStyles(theme => ({
   empty: {
     [theme.breakpoints.up("md")]: {
       textAlign: "center",
+    },
+  },
+  grid: {
+    display: "grid",
+    gap: "1rem",
+    gridTemplateColumns: "1fr",
+    [theme.breakpoints.up("md")]: {
+      columnGap: "3rem",
+      gridTemplateColumns: "1fr 1fr",
+    },
+    [theme.breakpoints.up("xl")]: {
+      columnGap: "4rem",
     },
   },
 }));
@@ -73,7 +73,7 @@ const TopSongs: FC<TopSongsProps> = ({ songs }) => {
         </>
       ) : (
         <Typography className={classes.empty} color="textSecondary">
-          No hay música disponible 😞
+          No hay música disponible
         </Typography>
       )}
     </Section>

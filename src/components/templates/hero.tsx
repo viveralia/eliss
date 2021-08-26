@@ -1,20 +1,14 @@
-import {
-  Box,
-  Container,
-  makeStyles,
-  Link,
-  Typography,
-} from "@material-ui/core";
+import { Box, Container, makeStyles, Link, Typography } from "@material-ui/core";
+import { buildUrl } from "cloudinary-build-url";
 import Img from "next/image";
 import NextLink from "next/link";
 import { FC } from "react";
-import { buildUrl } from "cloudinary-build-url";
 
 import { StrapiCloudinaryImage } from "~types";
 
 export interface HeroProps {
-  img: Pick<StrapiCloudinaryImage, "url" | "alternativeText" | "hash">;
   headline: string;
+  img: Pick<StrapiCloudinaryImage, "url" | "alternativeText" | "hash">;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -27,15 +21,8 @@ const useStyles = makeStyles(theme => ({
       width: 150,
     },
   },
-  container: {
-    position: "relative",
-    zIndex: 3,
-  },
   colorContainer: {
-    backgroundColor:
-      theme.palette.type === "dark"
-        ? theme.palette.background.paper
-        : "#1F1A20",
+    backgroundColor: theme.palette.type === "dark" ? theme.palette.background.paper : "#1F1A20",
     marginTop: -5,
     paddingBottom: "3.5rem",
     paddingTop: "3.5rem",
@@ -46,6 +33,10 @@ const useStyles = makeStyles(theme => ({
   },
   colorContainerInner: {
     position: "relative",
+  },
+  container: {
+    position: "relative",
+    zIndex: 3,
   },
   headline: {
     color: theme.palette.common.white,
@@ -59,31 +50,6 @@ const useStyles = makeStyles(theme => ({
       maxWidth: 600,
     },
   },
-  link: {
-    "&:hover": {
-      color: theme.palette.common.white,
-      opacity: 0.75,
-    },
-    color: theme.palette.common.white,
-    fontSize: "0.825rem",
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: "uppercase",
-    transition: "opacity 0.2s ease",
-    [theme.breakpoints.up("md")]: {
-      fontSize: "1rem",
-    },
-  },
-  imgContainer: {
-    position: "relative",
-    height: 220,
-    backgroundColor: "#212121",
-    [theme.breakpoints.up("md")]: {
-      height: 450,
-    },
-    [theme.breakpoints.up("lg")]: {
-      height: 500,
-    },
-  },
   // Does not cut off any head
   img: {
     objectPosition: "50% 60%",
@@ -95,6 +61,33 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.up("lg")]: {
       objectPosition: "50% 40%",
+    },
+  },
+
+  imgContainer: {
+    backgroundColor: "#212121",
+    height: 220,
+    position: "relative",
+    [theme.breakpoints.up("md")]: {
+      height: 450,
+    },
+    [theme.breakpoints.up("lg")]: {
+      height: 500,
+    },
+  },
+
+  link: {
+    "&:hover": {
+      color: theme.palette.common.white,
+      opacity: 0.75,
+    },
+    color: theme.palette.common.white,
+    fontFamily: theme.typography.h1.fontFamily,
+    fontSize: "0.825rem",
+    textTransform: "uppercase",
+    transition: "opacity 0.2s ease",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "1rem",
     },
   },
 }));
@@ -125,6 +118,7 @@ const Hero: FC<HeroProps> = ({ img, headline }) => {
       </div>
       <Box className={classes.colorContainer}>
         <Container className={classes.colorContainerInner}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/eliss.svg" alt="Eliss logo" className={classes.brand} />
           <Typography component="h1" className={classes.headline}>
             {headline}

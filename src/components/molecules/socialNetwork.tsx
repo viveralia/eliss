@@ -9,24 +9,24 @@ export interface SocialNetworkProps {
 }
 
 const useStyles = makeStyles(theme => ({
+  link: {
+    "&:hover, &:active": {
+      color: theme.palette.text.primary,
+      opacity: 1,
+    },
+    color: theme.palette.text.secondary,
+    fontFamily: theme.typography.h1.fontFamily,
+    fontSize: "1.725rem",
+    opacity: 0.875,
+    textTransform: theme.typography.h1.textTransform,
+    transition: "all 0.2s ease",
+  },
   listItem: {
     "&:last-child": {
       marginRight: 0,
     },
     display: "inline-block",
     marginRight: "1.25rem",
-  },
-  link: {
-    transition: "all 0.2s ease",
-    fontFamily: theme.typography.h1.fontFamily,
-    textTransform: theme.typography.h1.textTransform,
-    color: theme.palette.text.secondary,
-    opacity: 0.875,
-    fontSize: "1.725rem",
-    "&:hover, &:active": {
-      color: theme.palette.text.primary,
-      opacity: 1,
-    },
   },
 }));
 

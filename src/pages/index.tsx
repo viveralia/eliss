@@ -2,23 +2,11 @@ import { gql } from "@apollo/client";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
-import {
-  ComingEvents,
-  Contact,
-  Hero,
-  FeaturedVideo,
-  Layout,
-  TopSongs,
-} from "~components";
+import { ComingEvents, Contact, Hero, FeaturedVideo, Layout, TopSongs } from "~components";
 import { client } from "~graphql";
-import { HomePageQuery } from "~types/HomePageQuery";
+import { HomePageQuery } from "~types";
 
-const HomePage: NextPage<HomePageQuery> = ({
-  page,
-  songs,
-  events,
-  socialNetworks,
-}) => {
+const HomePage: NextPage<HomePageQuery> = ({ page, songs, events, socialNetworks }) => {
   const comingEventsOnly = events.filter(event => {
     return new Date(event.ends) > new Date();
   });
@@ -32,10 +20,10 @@ const HomePage: NextPage<HomePageQuery> = ({
         openGraph={{
           images: [
             {
-              url: page.seo.shareImg.formats.medium.url,
               alt: page.seo.shareImg.alternativeText,
-              width: page.seo.shareImg.formats.medium.width,
               height: page.seo.shareImg.formats.medium.height,
+              url: page.seo.shareImg.formats.medium.url,
+              width: page.seo.shareImg.formats.medium.width,
             },
           ],
         }}

@@ -1,7 +1,7 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import { FC } from "react";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   "@keyframes record": {
     "0%": {
       opacity: 0,
@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     display: "flex",
     fontSize: "0.625rem",
+    lineHeight: "initial",
     padding: "0.175rem 0.35rem",
     position: "absolute",
     right: "-2.5rem",
     top: "-0.5rem",
-    lineHeight: "initial",
   },
   rec: {
     animation: "$record 1s infinite",

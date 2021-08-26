@@ -2,12 +2,12 @@ import { Container, Link, makeStyles, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import { FC } from "react";
 
-import { StrapiSocialNetwork } from "~types";
 import { SocialNetwork } from "~components";
+import { StrapiSocialNetwork } from "~types";
 
 export interface FooterProps {
-  socialNetworks: Pick<StrapiSocialNetwork, "id" | "name" | "link">[];
   className?: string;
+  socialNetworks: Pick<StrapiSocialNetwork, "id" | "name" | "link">[];
 }
 
 const useStyles = makeStyles(theme => ({
@@ -30,18 +30,18 @@ const useStyles = makeStyles(theme => ({
   developedByLink: {
     fontSize: "inherit",
   },
-  title: {
-    marginBottom: "1.75rem",
-    fontSize: "0.8125rem",
-    [theme.breakpoints.up("md")]: {
-      fontSize: "1rem",
-    },
-  },
   list: {
     listStyle: "none",
     margin: 0,
     padding: 0,
     textAlign: "center",
+  },
+  title: {
+    fontSize: "0.8125rem",
+    marginBottom: "1.75rem",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "1rem",
+    },
   },
 }));
 
@@ -49,16 +49,8 @@ const Footer: FC<FooterProps> = ({ socialNetworks, className }) => {
   const classes = useStyles();
 
   return (
-    <Container
-      component="footer"
-      className={clsx(classes.container, className)}
-    >
-      <Typography
-        align="center"
-        variant="h6"
-        color="textSecondary"
-        className={classes.title}
-      >
+    <Container component="footer" className={clsx(classes.container, className)}>
+      <Typography align="center" variant="h6" color="textSecondary" className={classes.title}>
         Síguenos en nuestras redes sociales
       </Typography>
       <nav>
@@ -68,11 +60,7 @@ const Footer: FC<FooterProps> = ({ socialNetworks, className }) => {
           ))}
         </ul>
       </nav>
-      <Typography
-        align="center"
-        color="textSecondary"
-        className={classes.copyright}
-      >
+      <Typography align="center" color="textSecondary" className={classes.copyright}>
         &copy; Eliss {new Date().getFullYear()}. Desarrollado por{" "}
         <Link
           href="https://espacioenblan.co/?utm_source=eliss&utm_medium=customers"

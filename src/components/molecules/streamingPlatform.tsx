@@ -9,18 +9,18 @@ export interface StreamingPlatformProps {
 }
 
 const useStyles = makeStyles(theme => ({
+  listItem: {
+    "&:last-child": {
+      marginBottom: "0",
+    },
+    marginBottom: "0.75rem",
+  },
   platform: {
     fontSize: "1.125rem",
     marginRight: "0.75rem",
     [theme.breakpoints.up("md")]: {
       fontSize: "1.25rem",
     },
-  },
-  listItem: {
-    "&:last-child": {
-      marginBottom: "0",
-    },
-    marginBottom: "0.75rem",
   },
 }));
 
@@ -40,11 +40,8 @@ const StreamingPlatform: FC<StreamingPlatformProps> = ({ platform }) => {
         target="_blank"
         href={platform.link}
       >
-        <Icon
-          style={{ color: color || "inherit" }}
-          className={classes.platform}
-        />{" "}
-        Escuchar en {name}
+        <Icon style={{ color: color || "inherit" }} className={classes.platform} /> Escuchar en{" "}
+        {name}
       </Button>
     </li>
   );

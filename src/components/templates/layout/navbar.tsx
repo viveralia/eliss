@@ -4,16 +4,16 @@ import { useRouter } from "next/router";
 import { transparentize } from "polished";
 import { FC, useCallback } from "react";
 
-import navbarLinks from "~constants/navbarLinks";
 import { NavigationButton, NavigationLink } from "~components";
+import navbarLinks from "~constants/navbarLinks";
 
 const useStyles = makeStyles(theme => ({
   brand: {
-    height: 30,
-    width: "auto",
-    marginBottom: -3,
-    filter: theme.palette.type === "dark" ? "" : "invert(1)",
     cursor: "pointer",
+    filter: theme.palette.type === "dark" ? "" : "invert(1)",
+    height: 30,
+    marginBottom: -3,
+    width: "auto",
     [theme.breakpoints.up("md")]: {
       height: 36,
     },
@@ -31,18 +31,18 @@ const useStyles = makeStyles(theme => ({
     zIndex: 2,
   },
   containerInner: {
-    paddingTop: "0.75rem",
-    paddingBottom: "0.75rem",
     alignItems: "center",
     display: "flex",
     justifyContent: "space-between",
+    paddingBottom: "0.75rem",
+    paddingTop: "0.75rem",
   },
   list: {
+    borderTop: `1px solid ${theme.palette.divider}`,
     listStyle: "none",
     margin: 0,
-    padding: 0,
-    borderTop: `1px solid ${theme.palette.divider}`,
     overflow: "auto",
+    padding: 0,
     whiteSpace: "nowrap",
     [theme.breakpoints.up("md")]: {
       borderTop: "none",
@@ -83,7 +83,8 @@ const Navbar: FC = () => {
   return (
     <Box component="nav" className={classes.container}>
       <Container maxWidth="xl" className={classes.containerInner}>
-        <Link href="/">
+        <Link passHref href="/">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/eliss.svg" alt="Eliss logo" className={classes.brand} />
         </Link>
         <Hidden smDown>

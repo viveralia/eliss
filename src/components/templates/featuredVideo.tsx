@@ -4,8 +4,8 @@ import { FC } from "react";
 import { Section } from "~components";
 
 export interface FeaturedVideoProps {
-  videoSrc: string;
   channelHref: string;
+  videoSrc: string;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -20,16 +20,16 @@ const useStyles = makeStyles(theme => ({
     },
   },
   videoWrapper: {
-    position: "relative",
-    paddingBottom: "56.25%" /* 16:9 */,
-    height: 0,
     "& > iframe": {
+      height: "100%",
+      left: 0,
       position: "absolute",
       top: 0,
-      left: 0,
       width: "100%",
-      height: "100%",
     },
+    height: 0 /* 16:9 */,
+    paddingBottom: "56.25%",
+    position: "relative",
   },
 }));
 
@@ -41,6 +41,7 @@ const FeaturedVideo: FC<FeaturedVideoProps> = ({ videoSrc, channelHref }) => {
       <Box maxWidth={800} margin="auto">
         <div className={classes.videoWrapper}>
           <iframe
+            title="Ve el video de cuatro meses de Eliss en YouTube"
             loading="lazy"
             width="560"
             height="315"

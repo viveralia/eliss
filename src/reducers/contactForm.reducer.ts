@@ -1,7 +1,4 @@
-type ContactFormActionTypes =
-  | "SENDING_EMAIL"
-  | "EMAIL_SENT_SUCCESS"
-  | "EMAIL_SENT_FAILURE";
+type ContactFormActionTypes = "SENDING_EMAIL" | "EMAIL_SENT_SUCCESS" | "EMAIL_SENT_FAILURE";
 
 export interface ContactFormState {
   feedbackMessage: null | string;
@@ -18,18 +15,16 @@ export const contactFormReducer = (
 ): ContactFormState => {
   switch (action.type) {
     case "SENDING_EMAIL":
-      return { success: undefined, feedbackMessage: null };
+      return { feedbackMessage: null, success: undefined };
     case "EMAIL_SENT_SUCCESS":
       return {
+        feedbackMessage: "Hemos recibido tus datos y te responderemos a la brevedad.",
         success: true,
-        feedbackMessage:
-          "Hemos recibido tus datos y te responderemos a la brevedad.",
       };
     case "EMAIL_SENT_FAILURE":
       return {
+        feedbackMessage: "Algo salió mal y no pudimos enviar tus datos. Intenta más tarde.",
         success: false,
-        feedbackMessage:
-          "Algo salió mal y no pudimos enviar tus datos. Intenta más tarde.",
       };
     default:
       throw new Error();

@@ -1,17 +1,13 @@
+import { gql } from "@apollo/client";
 import { Container, Typography } from "@material-ui/core";
-import gql from "graphql-tag";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 
 import { Event, Layout, PageHeader } from "~components";
 import { client } from "~graphql";
-import { EventsPageQuery } from "~types/EventsPageQuery";
+import { EventsPageQuery } from "~types";
 
-const EventsPage: NextPage<EventsPageQuery> = ({
-  page,
-  events,
-  socialNetworks,
-}) => {
+const EventsPage: NextPage<EventsPageQuery> = ({ page, events, socialNetworks }) => {
   const comingEventsOnly = events.filter(event => {
     return new Date(event.ends) > new Date();
   });
@@ -24,10 +20,10 @@ const EventsPage: NextPage<EventsPageQuery> = ({
         openGraph={{
           images: [
             {
-              url: page.seo.shareImg.formats.medium.url,
               alt: page.seo.shareImg.alternativeText,
-              width: page.seo.shareImg.formats.medium.width,
               height: page.seo.shareImg.formats.medium.height,
+              url: page.seo.shareImg.formats.medium.url,
+              width: page.seo.shareImg.formats.medium.width,
             },
           ],
         }}
@@ -37,9 +33,7 @@ const EventsPage: NextPage<EventsPageQuery> = ({
         {comingEventsOnly.length > 0 ? (
           events.map(event => <Event key={event.id} event={event} />)
         ) : (
-          <Typography color="textSecondary">
-            No hay eventos disponibles 😞
-          </Typography>
+          <Typography color="textSecondary">No hay eventos disponibles</Typography>
         )}
       </Container>
     </Layout>
@@ -83,7 +77,9 @@ const eventsPageQuery = gql`
 `;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query<EventsPageQuery>({ query: eventsPageQuery })
+  const { data } = await client.query<EventsPageQuery>({
+    query: eventsPageQuery,
+  });
 
   return {
     props: { ...data },

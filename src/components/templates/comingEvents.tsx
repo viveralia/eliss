@@ -10,11 +10,6 @@ export interface ComingEventsProps {
 }
 
 const useStyles = makeStyles(theme => ({
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: "1.5rem",
-  },
   button: {
     display: "block",
     margin: "1.75rem auto 0 auto",
@@ -29,6 +24,11 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       textAlign: "center",
     },
+  },
+  grid: {
+    display: "grid",
+    gap: "1.5rem",
+    gridTemplateColumns: "1fr",
   },
 }));
 
@@ -60,7 +60,7 @@ const ComingEvents: FC<ComingEventsProps> = ({ events }) => {
         </>
       ) : (
         <Typography className={classes.empty} color="textSecondary">
-          No hay eventos disponibles 😞
+          No hay eventos disponibles
         </Typography>
       )}
     </Section>

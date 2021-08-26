@@ -3,11 +3,11 @@ export const sendEmail = async (payload: unknown) => {
   const path = `https://formspree.io/f/${formId}`;
 
   const response = await fetch(path, {
-    method: "POST",
+    body: JSON.stringify(payload),
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
+    method: "POST",
   });
 
   return response.json();

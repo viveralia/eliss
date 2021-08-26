@@ -1,13 +1,13 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { FC } from "react";
 
-import { StrapiSocialNetwork } from "~types";
 import { Footer, StreamingPlatformsModal } from "~components";
+import { StrapiSocialNetwork } from "~types";
 export interface LayoutProps {
   socialNetworks: Pick<StrapiSocialNetwork, "id" | "name" | "link" | "footer" | "streaming">[];
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
     flexDirection: "column",
@@ -33,10 +33,7 @@ const Layout: FC<LayoutProps> = ({ children, socialNetworks }) => {
     <Box className={classes.container}>
       <StreamingPlatformsModal streamingPlatforms={streamingPlatforms} />
       <main>{children}</main>
-      <Footer
-        className={classes.stickyFooter}
-        socialNetworks={footerSocialNetworks}
-      />
+      <Footer className={classes.stickyFooter} socialNetworks={footerSocialNetworks} />
     </Box>
   );
 };

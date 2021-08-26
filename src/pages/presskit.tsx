@@ -1,39 +1,35 @@
+import { gql } from "@apollo/client";
 import { Container, makeStyles } from "@material-ui/core";
-import gql from "graphql-tag";
 import { GetStaticProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Markdown from "react-markdown";
 
 import { Layout, PageHeader } from "~components";
 import { client } from "~graphql";
-import { PresskitPageQuery } from "~types/PresskitPageQuery";
+import { PresskitPageQuery } from "~types";
 
 const useStyles = makeStyles(theme => ({
   container: {
+    "& h2, & h3, & h4, & h5": {
+      fontFamily: theme.typography.h1.fontFamily,
+      fontWeight: 500,
+      textTransform: "uppercase",
+    },
     "& img": {
       marginLeft: "-1rem",
       marginRight: "-1rem",
       width: "calc(100% + 2rem)",
       [theme.breakpoints.up("sm")]: {
-        marginLeft: 0,
-        marginRight: 0,
-        width: "100%",
-      },
-      [theme.breakpoints.up("md")]: {
-        maxWidth: "50rem",
         display: "block",
         margin: "auto",
+        maxWidth: "40rem",
+        width: "100%",
       },
     },
     "& p": {
-      fontSize: "1rem",
       color: theme.palette.text.secondary,
+      fontSize: "1rem",
       lineHeight: 1.5,
-    },
-    "& h2, & h3, & h4, & h5": {
-      fontFamily: theme.typography.h1.fontFamily,
-      textTransform: "uppercase",
-      fontWeight: 500,
     },
   },
 }));
@@ -49,10 +45,10 @@ const PresskitPage: NextPage<PresskitPageQuery> = ({ page, socialNetworks }) => 
         openGraph={{
           images: [
             {
-              url: page.seo.shareImg.formats.medium.url,
               alt: page.seo.shareImg.alternativeText,
-              width: page.seo.shareImg.formats.medium.width,
               height: page.seo.shareImg.formats.medium.height,
+              url: page.seo.shareImg.formats.medium.url,
+              width: page.seo.shareImg.formats.medium.width,
             },
           ],
         }}
@@ -92,10 +88,12 @@ const presskitPageQuery = gql`
       streaming
     }
   }
-`
+`;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query<PresskitPageQuery>({ query: presskitPageQuery })
+  const { data } = await client.query<PresskitPageQuery>({
+    query: presskitPageQuery,
+  });
 
   return {
     props: { ...data },

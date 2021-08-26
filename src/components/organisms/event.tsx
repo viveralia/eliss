@@ -1,8 +1,8 @@
 import { Button, Link, makeStyles, Typography } from "@material-ui/core";
 import { FC, useEffect, useState } from "react";
 
-import { StrapiEvent } from "~types";
 import { LiveBadge, RevealOnScroll } from "~components";
+import { StrapiEvent } from "~types";
 
 export interface EventProps {
   event: Pick<StrapiEvent, "name" | "link" | "place" | "starts" | "ends">;
@@ -11,12 +11,24 @@ export interface EventProps {
 const DATE_REFRESH_TIME_IN_MS = 5000;
 
 const useStyles = makeStyles(theme => ({
-  name: {
-    fontSize: "1.125rem",
-    marginBottom: "0.125rem",
-    position: "relative",
+  button: {
+    display: "none",
     [theme.breakpoints.up("md")]: {
-      fontSize: "1.725rem",
+      display: "block",
+      marginRight: "3rem",
+    },
+  },
+  container: {
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  day: {
+    fontSize: "1.75rem",
+    lineHeight: 1,
+    marginBottom: "0.25rem",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "2.25rem",
     },
   },
   details: {
@@ -30,14 +42,6 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     display: "flex",
   },
-  day: {
-    fontSize: "1.75rem",
-    lineHeight: 1,
-    marginBottom: "0.25rem",
-    [theme.breakpoints.up("md")]: {
-      fontSize: "2.25rem",
-    },
-  },
   month: {
     fontSize: "1rem",
     lineHeight: 1,
@@ -46,21 +50,17 @@ const useStyles = makeStyles(theme => ({
       fontSize: "1.25rem",
     },
   },
-  container: {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "space-between",
+  name: {
+    fontSize: "1.125rem",
+    marginBottom: "0.125rem",
+    position: "relative",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "1.725rem",
+    },
   },
   rightContainer: {
     alignItems: "center",
     display: "flex",
-  },
-  button: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-      marginRight: "3rem",
-    },
   },
 }));
 
@@ -96,12 +96,7 @@ const Event: FC<EventProps> = ({ event }) => {
   return (
     <RevealOnScroll>
       <article className={classes.container}>
-        <Link
-          underline="none"
-          href={event.link}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link underline="none" href={event.link} target="_blank" rel="noopener noreferrer">
           <Typography variant="h3" className={classes.name}>
             {event.name}
             {isLive && <LiveBadge />}
