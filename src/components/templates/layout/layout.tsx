@@ -1,7 +1,7 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { FC } from "react";
 
-import { Footer, StreamingPlatformsModal } from "~components";
+import { CartDrawer, Footer, StreamingPlatformsModal } from "~components";
 import { StrapiSocialNetwork } from "~types";
 export interface LayoutProps {
   socialNetworks: Pick<StrapiSocialNetwork, "id" | "name" | "link" | "footer" | "streaming">[];
@@ -32,6 +32,7 @@ const Layout: FC<LayoutProps> = ({ children, socialNetworks }) => {
   return (
     <Box className={classes.container}>
       <StreamingPlatformsModal streamingPlatforms={streamingPlatforms} />
+      <CartDrawer />
       <main>{children}</main>
       <Footer className={classes.stickyFooter} socialNetworks={footerSocialNetworks} />
     </Box>

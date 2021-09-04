@@ -9,6 +9,8 @@ export * from "./pageHeader";
 export { default as Section } from "./section";
 export * from "./section";
 
+export { default as ShoppingCartButton } from "./shoppingCartButton";
+
 export { default as SocialNetwork } from "./socialNetwork";
 export * from "./socialNetwork";
 

@@ -3,10 +3,11 @@ import { DefaultSeo } from "next-seo";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useEffect, useMemo } from "react";
+import { CartProvider } from "use-shopping-cart";
 
 import { Navbar } from "~components";
 import defaultSeo from "~constants/defaultSeo";
-import { StreamingModalContextProvider } from "~context";
+import { CartDrawerContextProvider, StreamingModalContextProvider } from "~context";
 import { darkTheme, lightTheme } from "~styles";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
@@ -38,10 +39,23 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <StreamingModalContextProvider>
-          <Navbar />
-          <Component {...pageProps} />
-        </StreamingModalContextProvider>
+        <CartProvider
+          mode="payment"
+          cartMode="client-only"
+          stripe={process.env.NEXT_PUBLIC_STRIPE_API_KEY!}
+          successUrl={process.env.NEXT_PUBLIC_STRIPE_SUCCESS_URL}
+          cancelUrl={process.env.NEXT_PUBLIC_STRIPE_CANCEL_URL}
+          currency="MXN"
+          allowedCountries={["MX"]}
+          billingAddressCollection
+        >
+          <CartDrawerContextProvider>
+            <StreamingModalContextProvider>
+              <Navbar />
+              <Component {...pageProps} />
+            </StreamingModalContextProvider>
+          </CartDrawerContextProvider>
+        </CartProvider>
       </ThemeProvider>
     </>
   );

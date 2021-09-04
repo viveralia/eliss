@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { transparentize } from "polished";
 import { FC, useCallback } from "react";
 
-import { NavigationButton, NavigationLink } from "~components";
+import { NavigationButton, NavigationLink, ShoppingCartButton } from "~components";
 import navbarLinks from "~constants/navbarLinks";
 
 const useStyles = makeStyles(theme => ({
@@ -48,6 +48,10 @@ const useStyles = makeStyles(theme => ({
       borderTop: "none",
     },
   },
+  rightMenuContainer: {
+    alignItems: "center",
+    display: "flex",
+  },
 }));
 
 const NavigationLinks: FC = () => {
@@ -87,9 +91,12 @@ const Navbar: FC = () => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/eliss.svg" alt="Eliss logo" className={classes.brand} />
         </Link>
-        <Hidden smDown>
-          <NavigationLinks />
-        </Hidden>
+        <div className={classes.rightMenuContainer}>
+          <Hidden smDown>
+            <NavigationLinks />
+          </Hidden>
+          <ShoppingCartButton />
+        </div>
       </Container>
       <Hidden mdUp>
         <NavigationLinks />
